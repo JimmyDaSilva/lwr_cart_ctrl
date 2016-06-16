@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package>
+  <name>lwr_cart_ctrl</name>
+  <version>1.0.0</version>
+  <description>The lwr_cart_ctrl package</description>
+
+  <maintainer email="hoarau.robotics@gmail.com">Jimmy Da Silva</maintainer>
+
+  <license>LGPLv3</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>rtt</build_depend>
+  <build_depend>rtt_ros</build_depend>
+  <build_depend>rtt_roscomm</build_depend>
+  <build_depend>rtt_ros_kdl_tools</build_depend>
+  <build_depend>eigen_conversions</build_depend>
+  <build_depend>kdl_conversions</build_depend>
+
+  <run_depend>rtt</run_depend>
+  <run_depend>rtt_ros</run_depend>
+  <run_depend>rtt_roscomm</run_depend>
+  <run_depend>rtt_ros_kdl_tools</run_depend>
+  <run_depend>eigen_conversions</run_depend>
+  <run_depend>kdl_conversions</run_depend>
+
+  <export>
+  </export>
+</package>

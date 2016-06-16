@@ -1,0 +1,39 @@
+import("rtt_rospack")
+# The magic utility script
+runScript(ros.find("lwr_utils")+"/scripts/utils.ops")
+
+# Load the robot (<name>, <is sim> ,<start component>)
+loadRobot(getRobotName(),isSim(),true)
+setRobotInitialJointConfiguration(0.0,0.0,0.0,1.5,0.0,0.0,0.0)
+
+# Start the state publisher (<start component>)
+loadStatePublisher(true)
+
+# Load and start the controller
+import("rtt_ros")
+
+# Import and load the TF component
+ros.import("rtt_tf");
+loadComponent("tf","rtt_tf::RTT_TF");
+setActivity("tf",0.001,20,ORO_SCHED_RT)
+configureComponent("tf")
+startComponent("tf")
+# This will load all the dependencies in packages.xml <export><rtt_ros>
+ros.import("lwr_cart_ctrl")
+
+loadComponent("lwr_cart_ctrl","LwrCartCtrl")
+setActivity("lwr_cart_ctrl",0.001,LowestPriority,ORO_SCHED_RT)
+
+# Connect tf to component
+connectServices("lwr_cart_ctrl","tf");
+
+connectPeers("lwr_cart_ctrl",getRobotName())
+
+configureComponent("lwr_cart_ctrl")
+
+# Connects corresponding ports from your controller to the robot component
+connectStandardPorts(getRobotName(),"lwr_cart_ctrl",ConnPolicy())
+
+startComponent("lwr_cart_ctrl")
+
+print.ln("\n\n\x1B[32mYou can change the robot control modes using the krl_tool\x1B[0m\n")
